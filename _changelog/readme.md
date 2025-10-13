@@ -31,10 +31,10 @@ Als gebruiker wil ik een spel kunnen liken of toevoegen aan mijn favorieten, zod
 ## ERD Miro versie 1. en niet op teams gekeken.
 ![ERD miro](image/miro-erd.png)
 
-# 13-10-2025 
-## ERD
+# 13-10-2025 ERD goedkeuring
 ## [hulp van Antwan]
 ![ERD miro](image/goedgekeurde-erd.png)
+
 
 
 
