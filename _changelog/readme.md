@@ -1,6 +1,6 @@
-10-10-2025
+#10-10-2025
 
-User story
+##User story
 Registratie & Login
 Als nieuwe gebruiker wil ik een account kunnen aanmaken, zodat ik persoonlijke functies kan gebruiken zoals spellen toevoegen en beheren.
 2. Authenticatie
@@ -23,13 +23,14 @@ Als gebruiker wil ik drinkspellen kunnen zoeken of filteren op type, aantal spel
 Als gebruiker wil ik een spel kunnen liken of toevoegen aan mijn favorieten, zodat ik mijn favoriete spellen makkelijk terugvind.
 
 ERD Miro
-Versie 1. niet op teams gekeken.
+##Versie 1. niet op teams gekeken.
 ![ERD miro](image/miro-erd.png)
 
-13-10-2025 
-ERD
+#13-10-2025 
+##ERD
 [hulp van Antwan]
 ![ERD miro](image/goedgekeurde-erd.png)
+
 
 
 
