@@ -3,10 +3,14 @@
 User story
 
 ERD Miro
-![naam van de afbeelding](image/miro-erd.png)
+Versie 1. niet op teams gekeken.
+![ERD miro](image/miro-erd.png)
 
 13-10-2025 
 ERD
+[hulp van Antwan]
+![ERD miro](image/goedgekeurde-erd.png)
+
 
 
 
