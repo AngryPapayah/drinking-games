@@ -3,10 +3,11 @@
 User story
 
 ERD Miro
-![Miro ERD](\_changelog\miro-erd.png)
+![Miro ERD](E:\development\drinking-games\_changelog/miro-erd.png)
 
 13-10-2025 
 ERD
+
 
 
 
