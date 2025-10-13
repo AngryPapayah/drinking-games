@@ -3,8 +3,10 @@
 User story
 
 ERD Miro
-![ERD miro](changelog\miro-erd.png)
+![Miro ERD](\_changelog\miro-erd.png)
+
 13-10-2025 
 ERD
+
 
 
