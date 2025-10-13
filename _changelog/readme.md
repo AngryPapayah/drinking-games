@@ -1,39 +1,81 @@
 # 10-10-2025 User story
-## Registratie & Login
-Als nieuwe gebruiker wil ik een account kunnen aanmaken, zodat ik persoonlijke functies kan gebruiken zoals spellen toevoegen en beheren.
-## 2. Authenticatie
-Als geregistreerde gebruiker wil ik kunnen inloggen met mijn e-mailadres en wachtwoord, zodat ik toegang krijg tot mijn profiel en mijn zelfgemaakte spellen.
+#Userstory Guest
+## 1. Spellen bekijken
+###Als gast wil ik een overzicht kunnen zien van alle drankspellen,
+zodat ik ideeën krijg over welke drankspellen er bestaan.
 
-## 3. Spellenoverzicht (Read)
-Als bezoeker wil ik een lijst kunnen zien van alle beschikbare drinkspellen, zodat ik kan kiezen welk spel ik wil spelen.
+## 2. Detail van een spel lezen
+### Als gast wil ik op een spel kunnen klikken om de details, regels en benodigdheden te lezen,
+zodat ik begrijp hoe het gespeeld wordt.
 
-## 4. Spel Details (Read)
-Als gebruiker wil ik de details van een specifiek drinkspel kunnen bekijken, zodat ik weet welke materialen en regels nodig zijn.
+## 3. Zoeken en filteren
+### Als gast wil ik drankspellen kunnen zoeken of filteren op type of moeilijkheid,
+zodat ik snel een spel vind dat past bij mijn groep of gelegenheid.
 
-## 5. Spel Aanmaken (Create)
-Als ingelogde gebruiker wil ik een nieuw drinkspel kunnen toevoegen, zodat anderen mijn spel ook kunnen zien en spelen.
+## 4. Navigeren op de website
+### Als gast wil ik makkelijk kunnen navigeren tussen pagina’s zoals “Alle Spellen” en “Over Boozebuddies”,
+zodat ik de website intuïtief kan gebruiken zonder account.
 
-## 6. Spel Bewerken (Update)
-Als auteur van een spel wil ik de informatie van mijn zelfgemaakte spel kunnen bewerken, zodat ik fouten kan verbeteren of regels kan updaten.
+## 5. Aangemoedigd worden om in te loggen of registreren
+Als gast wil ik bij acties zoals “spel aanmaken” of “favoriet maken” een melding of loginprompt krijgen,
+zodat ik weet dat ik een account nodig heb voor die functies.
 
-## 7. Spel Verwijderen (Delete)
-Als auteur van een spel wil ik mijn eigen drinkspel kunnen verwijderen, zodat ik controle behoud over mijn content.
+#Userstory Logged in
+## 1. Spellen aanmaken
+### Als ingelogde gebruiker wil ik een nieuw drankspel kunnen aanmaken via een formulier,
+zodat ik mijn eigen spelideeën met anderen kan delen.
 
-## 8. Profielpagina
-Als gebruiker wil ik een profielpagina kunnen bekijken, zodat ik mijn gegevens en mijn geüploade spellen kan zien.
+## 2. Spellen bewerken
+### Als ingelogde gebruiker wil ik mijn eigen aangemaakte drankspellen kunnen bewerken,
+zodat ik fouten kan verbeteren of extra informatie kan toevoegen.
 
-## 9. Zoek- en filterfunctie
-Als gebruiker wil ik drinkspellen kunnen zoeken of filteren op type, aantal spelers of moeilijkheidsgraad, zodat ik snel een passend spel kan vinden.
+## 3. Spellen verwijderen
+### Als ingelogde gebruiker wil ik mijn eigen spellen kunnen verwijderen,
+zodat ik controle heb over welke spellen zichtbaar blijven.
 
-## 10. Beoordeling of favorieten (optioneel uitbreidbaar)
-Als gebruiker wil ik een spel kunnen liken of toevoegen aan mijn favorieten, zodat ik mijn favoriete spellen makkelijk terugvind.
+## 4. Favorieten opslaan
+### Als ingelogde gebruiker wil ik drankspellen kunnen toevoegen aan mijn favorietenlijst,
+zodat ik later snel mijn favoriete spellen terugvind.
 
+## 5. Favorieten beheren
+### Als ingelogde gebruiker wil ik mijn favorietenlijst kunnen bekijken en spellen eruit verwijderen,
+zodat ik mijn lijst up-to-date kan houden met enkel de spellen die ik echt leuk vind
 ## ERD Miro versie 1. en niet op teams gekeken.
-![ERD miro](image/miro-erd.png)
+
+# User story ingelogde gebruiker
+## 1. Spellen aanmaken
+### Als ingelogde gebruiker wil ik een nieuw drankspel kunnen aanmaken via een formulier,
+zodat ik mijn eigen spelideeën met anderen kan delen.
+
+## 2. Spellen bewerken
+### Als ingelogde gebruiker wil ik mijn eigen aangemaakte drankspellen kunnen bewerken,
+zodat ik fouten kan verbeteren of extra informatie kan toevoegen.
+
+## 3. Spellen verwijderen
+### Als ingelogde gebruiker wil ik mijn eigen spellen kunnen verwijderen,
+zodat ik controle heb over welke spellen zichtbaar blijven.
+
+## 4. Favorieten opslaan
+### Als ingelogde gebruiker wil ik drankspellen kunnen toevoegen aan mijn favorietenlijst,
+zodat ik later snel mijn favoriete spellen terugvind.
+
+## 5. Favorieten beheren
+### Als ingelogde gebruiker wil ik mijn favorietenlijst kunnen bekijken en spellen eruit verwijderen,
+zodat ik mijn lijst up-to-date kan houden met enkel de spellen die ik echt leuk vind.
+
+## ERD in Miro
+### Hier ben ik met een ERD begonnen. Ik wist hier toen niet dat het in drawsql moest omdat ik mijn teamskanaal voor PRG5 nog op hidden had.
+![Hidden teams kanaal](image/teams1.png)
+
+![Niet meer hidden kanaal](image/teams2.png)
+
+![Mijn ERD in miro, nog geen feedback](image/miro-erd.png)
 
 # 13-10-2025 ERD goedkeuring
 ## [hulp van Antwan]
-![ERD miro](image/goedgekeurde-erd.png)
+### Ik heb feedback gevraagd aan Antwan van mijn ERd in Miro, natuurlijk was het niet goed omdat ik de teamskanaal niet open had. Ik heb de teamskanaal gelijk uit de hidden kanalen gedaan en het via drawsql gedaan.
+![ERD met feedback van docent (Antwan)](image/goedgekeurde-erd.png)
+
 
 
 
