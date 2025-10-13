@@ -20,7 +20,7 @@ zodat ik de website intuïtief kan gebruiken zonder account.
 Als gast wil ik bij acties zoals “spel aanmaken” of “favoriet maken” een melding of loginprompt krijgen,
 zodat ik weet dat ik een account nodig heb voor die functies.
 
-#Userstory Logged in
+# Userstory Logged in
 ## 1. Spellen aanmaken
 Als ingelogde gebruiker wil ik een nieuw drankspel kunnen aanmaken via een formulier,
 zodat ik mijn eigen spelideeën met anderen kan delen.
@@ -74,6 +74,7 @@ Hier ben ik met een ERD begonnen. Ik wist hier toen niet dat het in drawsql moes
 ## hulp van Antwan
 Ik heb feedback gevraagd aan Antwan van mijn ERd in Miro, natuurlijk was het niet goed omdat ik de teamskanaal niet open had. Ik heb de teamskanaal gelijk uit de hidden kanalen gedaan en het via drawsql gedaan.
 ![ERD met feedback van docent (Antwan)](image/goedgekeurde-erd.png)
+
 
 
 
