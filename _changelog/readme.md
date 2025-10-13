@@ -1,7 +1,7 @@
 # 10-10-2025 User story
-#Userstory Guest
+# Userstory Guest
 ## 1. Spellen bekijken
-###Als gast wil ik een overzicht kunnen zien van alle drankspellen,
+### Als gast wil ik een overzicht kunnen zien van alle drankspellen,
 zodat ik ideeën krijg over welke drankspellen er bestaan.
 
 ## 2. Detail van een spel lezen
@@ -40,7 +40,6 @@ zodat ik later snel mijn favoriete spellen terugvind.
 ## 5. Favorieten beheren
 ### Als ingelogde gebruiker wil ik mijn favorietenlijst kunnen bekijken en spellen eruit verwijderen,
 zodat ik mijn lijst up-to-date kan houden met enkel de spellen die ik echt leuk vind
-## ERD Miro versie 1. en niet op teams gekeken.
 
 # User story ingelogde gebruiker
 ## 1. Spellen aanmaken
@@ -75,6 +74,7 @@ zodat ik mijn lijst up-to-date kan houden met enkel de spellen die ik echt leuk 
 ## [hulp van Antwan]
 ### Ik heb feedback gevraagd aan Antwan van mijn ERd in Miro, natuurlijk was het niet goed omdat ik de teamskanaal niet open had. Ik heb de teamskanaal gelijk uit de hidden kanalen gedaan en het via drawsql gedaan.
 ![ERD met feedback van docent (Antwan)](image/goedgekeurde-erd.png)
+
 
 
 
