@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,4 +18,25 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::get('/home-page', function () {
+    return view('home-page');
+});
+
+Route::get('/contact-page', function () {
+    return view('contact-page');
+})->name('contact-page');
+
+Route::get('/about-us', function () {
+    $company = 'BoozeBuddies';
+    return view('about-us', [
+        'company' => $company
+    ]);
+});
+
+Route::get('game/{id}', function (int $id) {
+    return view('game', ['id' => $id]);
+});
+
+Route::resource('games', GameController::class);
+
+require __DIR__ . '/auth.php';
