@@ -5,10 +5,21 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Home</title>
 </head>
 <body>
-<h1>Welcome to BoozeBuddies drinking games!</h1>
-<a href="{{route('contact-page')}}">Go back to contact page</a>
+<nav>
+    <a href="/">Home</a>
+    <a href="/about-us">About</a>
+    <a href="/contact-page">Contact</a>
+</nav>
+@isset($header)
+    <header>
+        {{$header}}
+    </header>
+@endisset
+
+{{ $slot }}
+
 </body>
 </html>

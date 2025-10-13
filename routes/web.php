@@ -18,8 +18,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/home-page', function () {
-    return view('home-page');
+Route::get('/home', function () {
+    return view('home');
 });
 
 Route::get('/contact-page', function () {
