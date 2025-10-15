@@ -4,9 +4,10 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -18,7 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('home');
 });
 //Route::get('/game', function () {
@@ -29,13 +30,16 @@ Route::get('/contact-page', function () {
     return view('contact-page');
 })->name('contact-page');
 
+Route::get('/form', function () {
+    return view('games.create');
+})->name('form');
+
 Route::get('/about-us', function () {
     $company = 'BoozeBuddies';
     return view('about-us', [
         'company' => $company
     ]);
 });
-
 //Route::get('game/{id}', function (int $id) {
 //    return view('game', ['id' => $id]);
 //});

@@ -10,6 +10,7 @@
 <body>
 
 <ul>
+    <a href="{{ route('games.create') }}">Add Drinking Game</a>
     @foreach($games as $game)
         <h1><a href="{{ route('games.show', $game) }}">{{ $game->name }}</a></h1>
     @endforeach

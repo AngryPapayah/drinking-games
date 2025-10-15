@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Games;
 
+//use function Laravel\Prompts\error;
+
 class GameController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function home()
     {
         $games = Games::all();
         return view('games.index', compact('games'));
@@ -26,7 +28,7 @@ class GameController extends Controller
      */
     public function create()
     {
-        //
+        return view('games.create');
     }
 
     /**
@@ -34,7 +36,14 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /** @var array $validated */
+        $request->validate([
+            'name' => 'required|unique:games|max:255',
+            'description' => 'required',
+            'total_players' => 'required|integer|min:1',
+        ]);
+        return redirect()->route('games.show', ['game' => $game->id]);
+
     }
 
     /**
