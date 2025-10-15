@@ -42,7 +42,7 @@ class GameController extends Controller
             'description' => 'required',
             'total_players' => 'required|integer|min:1',
         ]);
-        return redirect()->route('games.show', ['game' => $game->id]);
+      
 
     }
 
