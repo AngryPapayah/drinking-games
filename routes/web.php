@@ -21,6 +21,9 @@ Route::middleware('auth')->group(function () {
 Route::get('/home', function () {
     return view('home');
 });
+//Route::get('/game', function () {
+//    return view('game');
+//});
 
 Route::get('/contact-page', function () {
     return view('contact-page');
@@ -33,9 +36,9 @@ Route::get('/about-us', function () {
     ]);
 });
 
-Route::get('game/{id}', function (int $id) {
-    return view('game', ['id' => $id]);
-});
+//Route::get('game/{id}', function (int $id) {
+//    return view('game', ['id' => $id]);
+//});
 
 Route::resource('games', GameController::class);
 

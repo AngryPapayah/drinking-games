@@ -8,6 +8,11 @@
     <title>Document</title>
 </head>
 <body>
-<h1>Game: {{ $id }}</h1>
+
+<ul>
+    @foreach($games as $game)
+        <h1><a href="{{ route('games.show', $game) }}">{{ $game->name }}</a></h1>
+    @endforeach
+</ul>
 </body>
 </html>

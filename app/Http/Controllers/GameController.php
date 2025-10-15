@@ -3,15 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Games;
 
 class GameController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function show(string $id)
+    public function index()
     {
-        return view('games', ['id' => $id]);
+        $games = Games::all();
+        return view('games.index', compact('games'));
+    }
+
+    public function show(Games $game)
+    {
+        return view('games.show', compact('game'));
     }
 
     /**
@@ -26,14 +33,6 @@ class GameController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
     {
         //
     }
