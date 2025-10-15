@@ -36,13 +36,19 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        /** @var array $validated */
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|unique:games|max:255',
             'description' => 'required',
             'total_players' => 'required|integer|min:1',
         ]);
-      
+
+        $game = new Games();
+        $game->name = $validated['name'];
+        $game->description = $validated['description'];
+        $game->total_players = $validated['total_players'];
+        $game->save();
+
+        return redirect()->back()->with('success', 'Game succesvol toegevoegd!');
 
     }
 
