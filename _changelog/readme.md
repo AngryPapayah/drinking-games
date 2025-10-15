@@ -75,6 +75,17 @@ Hier ben ik met een ERD begonnen. Ik wist hier toen niet dat het in drawsql moes
 Ik heb feedback gevraagd aan Antwan van mijn ERd in Miro, natuurlijk was het niet goed omdat ik de teamskanaal niet open had. Ik heb de teamskanaal gelijk uit de hidden kanalen gedaan en het via drawsql gedaan.
 ![ERD met feedback van docent (Antwan)](image/goedgekeurde-erd.png)
 
+# 14-10-2025 Database toevoegen
+
+![Mijn database](image/database.png)
+
+# 15-10-25 Homepage fix + Create form
+
+![Homepage](image/homepage.png)
+![Form/create](image/form.png)
+
+
+
 
 
 
