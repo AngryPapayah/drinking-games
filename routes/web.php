@@ -26,13 +26,17 @@ Route::get('/', function () {
 //    return view('game');
 //});
 
+//Route::get('/games', [GameController::class]);
+
 Route::get('/contact-page', function () {
     return view('contact-page');
 })->name('contact-page');
 
-Route::get('/form', function () {
-    return view('games.create');
-})->name('form');
+//Route::get('/create', function () {
+//    return view('games.create');
+//})->name('create');
+
+//Route::post('/games/store', [GameController::class, 'store'])->name('games.store');
 
 Route::get('/about-us', function () {
     $company = 'BoozeBuddies';

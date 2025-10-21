@@ -12,12 +12,18 @@ class GameController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function home()
+//    public function home()
+//    {
+//        $games = Games::all();
+//        return view('games.index', compact('games'));
+//    }
+    public function index()
     {
+        // your logic here
         $games = Games::all();
-        return view('games.index', compact('games'));
+        return view('games.index'); // or some response
     }
-
+    
     public function show(Games $game)
     {
         return view('games.show', compact('game'));
@@ -34,23 +40,27 @@ class GameController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(Request $request)
     {
         $validated = $request->validate([
             'name' => 'required|unique:games|max:255',
             'description' => 'required',
             'total_players' => 'required|integer|min:1',
+            'user_id' => ['required', 'exists:users,id']
         ]);
 
         $game = new Games();
         $game->name = $validated['name'];
         $game->description = $validated['description'];
         $game->total_players = $validated['total_players'];
+        $game->user_id = $validated['user_id'];
         $game->save();
-
+        Games::create($validated);
         return redirect()->back()->with('success', 'Game succesvol toegevoegd!');
 
     }
+
 
     /**
      * Show the form for editing the specified resource.

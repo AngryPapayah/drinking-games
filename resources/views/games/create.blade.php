@@ -1,5 +1,5 @@
 <x-app-layout>
-    <form action="{{ route('games.store') }}" method="POST">
+    <form method="POST" action="{{route('games.store') }}">
         @csrf
 
         <h2>Add new game</h2>
@@ -19,6 +19,8 @@
             <label for="total_players">Max players:</label><br>
             <input type="number" name="total_players" min="1" required>
         </div>
+
+        <input type="hidden" name="user_id" value="{{ auth()->id() }}"/>
 
         <button type="submit">Save</button>
     </form>
