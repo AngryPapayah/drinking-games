@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Games;
+use App\Models\GameType;
 
 //use function Laravel\Prompts\error;
 
@@ -44,7 +45,9 @@ class GameController extends Controller
      */
     public function create()
     {
-        return view('games.create');
+//        return view('games.create');
+        $gameTypes = GameType::all(); // alle types ophalen uit de DB
+        return view('games.create', compact('gameTypes'));
     }
 
     /**
@@ -57,9 +60,10 @@ class GameController extends Controller
             'name' => 'required|unique:games|max:255',
             'description' => 'required',
             'total_players' => 'required|integer|min:1',
-            'game_type_id' => 'required',
-            'user_id' => ['required', 'exists:users,id'],
+            'user_id' => 'required|integer',
+            'game_type_id' => 'required|integer|exists:game_types,id',
         ]);
+
 
         Games::create($validated);
 

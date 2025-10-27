@@ -23,6 +23,9 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
+Route::get('/games/create', [GameController::class, 'create'])->name('games.create');
+
+
 Route::get('/contact-page', function () {
     return view('contact-page');
 })->name('contact-page');

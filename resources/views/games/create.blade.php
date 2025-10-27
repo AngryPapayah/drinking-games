@@ -64,7 +64,7 @@
                         <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
                         @enderror
                     </div>
-
+                    
                     {{-- Game Type --}}
                     <div>
                         <label for="game_type_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -74,13 +74,15 @@
                             name="game_type_id"
                             id="game_type_id"
                             class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-indigo-500 focus:ring-indigo-500"
+                            required
                         >
                             <option value="">-- Please choose an option --</option>
-                            <option value="card" {{ old('game_type_id') == 'card' ? 'selected' : '' }}>Card</option>
-                            <option value="board" {{ old('game_type_id') == 'board' ? 'selected' : '' }}>Board</option>
-                            <option value="strategy" {{ old('game_type_id') == 'strategy' ? 'selected' : '' }}>
-                                Strategy
-                            </option>
+                            @foreach($gameTypes as $type)
+                                <option
+                                    value="{{ $type->id }}" {{ old('game_type_id') == $type->id ? 'selected' : '' }}>
+                                    {{ $type->name }}
+                                </option>
+                            @endforeach
                         </select>
                         @error('game_type_id')
                         <p class="text-sm text-red-500 mt-1">{{ $message }}</p>

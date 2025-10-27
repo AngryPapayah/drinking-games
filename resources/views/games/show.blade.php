@@ -29,8 +29,8 @@
                         </div>
 
                         <div class="flex items-center space-x-2">
-                            <span class="font-semibold">🧍 Created by:</span>
-                            <span>User #{{ $game->user_id }}</span>
+                            <span class="font-semibold">🧍 Created by: {{ $game->user->name ?? 'Unknown' }}</span>
+
                         </div>
                     </div>
 

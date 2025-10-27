@@ -1,8 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
         <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Welcome to BoozeFriends
+            @if(Auth::check())
+                Welcome, {{ Auth::user()->name }}
+            @else
+                Welcome, Guest
+            @endif
+
         </h1>
+
     </x-slot>
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
@@ -16,7 +22,6 @@
             </div>
         </div>
 
-        {{-- Game Cards --}}
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @forelse ($games as $game)
                 <a href="{{ route('games.show', $game->id) }}"
