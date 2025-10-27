@@ -23,7 +23,7 @@ class GameController extends Controller
         $games = Games::all();
         return view('games.index'); // or some response
     }
-    
+
     public function show(Games $game)
     {
         return view('games.show', compact('game'));
@@ -48,17 +48,15 @@ class GameController extends Controller
             'description' => 'required',
             'total_players' => 'required|integer|min:1',
             'user_id' => ['required', 'exists:users,id']
+
         ]);
 
-        $game = new Games();
-        $game->name = $validated['name'];
-        $game->description = $validated['description'];
-        $game->total_players = $validated['total_players'];
-        $game->user_id = $validated['user_id'];
-        $game->save();
-        Games::create($validated);
-        return redirect()->back()->with('success', 'Game succesvol toegevoegd!');
 
+        // Eenvoudig opslaan
+        Games::create($validated);
+
+        return redirect()->route('games.index')
+            ->with('success', 'Game succesvol toegevoegd!');
     }
 
 

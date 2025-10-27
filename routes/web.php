@@ -4,7 +4,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-//
+
 //Route::get('/', function () {
 //    return view('welcome');
 //});
@@ -44,9 +44,6 @@ Route::get('/about-us', function () {
         'company' => $company
     ]);
 });
-//Route::get('game/{id}', function (int $id) {
-//    return view('game', ['id' => $id]);
-//});
 
 Route::resource('games', GameController::class);
 
