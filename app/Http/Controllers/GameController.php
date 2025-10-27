@@ -19,10 +19,20 @@ class GameController extends Controller
 //    }
     public function index()
     {
-        // your logic here
         $games = Games::all();
-        return view('games.index'); // or some response
+        return view('games.index', compact('games'));
     }
+
+
+    public function dashboard()
+    {
+        // Haal alle games op uit de database
+        $games = Games::all();
+
+        // Stuur ze door naar de dashboard view
+        return view('dashboard', compact('games'));
+    }
+
 
     public function show(Games $game)
     {
@@ -47,16 +57,13 @@ class GameController extends Controller
             'name' => 'required|unique:games|max:255',
             'description' => 'required',
             'total_players' => 'required|integer|min:1',
-            'user_id' => ['required', 'exists:users,id']
-
+            'game_type_id' => 'required',
+            'user_id' => ['required', 'exists:users,id'],
         ]);
 
-
-        // Eenvoudig opslaan
         Games::create($validated);
 
-        return redirect()->route('games.index')
-            ->with('success', 'Game succesvol toegevoegd!');
+        return redirect()->route('dashboard')->with('success', 'Game succesvol toegevoegd!');
     }
 
 
