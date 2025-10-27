@@ -45,8 +45,12 @@ class GameController extends Controller
      */
     public function create()
     {
-//        return view('games.create');
-        $gameTypes = GameType::all(); // alle types ophalen uit de DB
+        // Alleen ingelogde gebruikers mogen games toevoegen
+        if (!auth()->check()) {
+            abort(403, 'Je moet ingelogd zijn om een game toe te voegen.');
+        }
+
+        $gameTypes = GameType::all();
         return view('games.create', compact('gameTypes'));
     }
 
@@ -56,6 +60,10 @@ class GameController extends Controller
 
     public function store(Request $request)
     {
+        if (!auth()->check()) {
+            abort(403, 'Je moet ingelogd zijn om een game toe te voegen.');
+        }
+
         $validated = $request->validate([
             'name' => 'required|unique:games|max:255',
             'description' => 'required',
@@ -76,7 +84,13 @@ class GameController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // Alleen admins mogen games bewerken
+        if (!auth()->user() || !auth()->user()->isAdmin()) {
+            abort(403, 'Alleen admins mogen games bewerken.');
+        }
+
+        $gameTypes = GameType::all();
+        return view('games.edit', compact('game', 'gameTypes'));
     }
 
     /**
@@ -84,7 +98,21 @@ class GameController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+//        if (!auth()->user() || !auth()->user()->isAdmin()) {
+//            abort(403, 'Alleen admins mogen games bijwerken.');
+//        }
+//
+//        $validated = $request->validate([
+//            'name' => 'required|max:255|unique:games,name,' . $game->id,
+//            'description' => 'required',
+//            'total_players' => 'required|integer|min:1',
+//            'user_id' => 'required|integer',
+//            'game_type_id' => 'required|integer|exists:game_types,id',
+//        ]);
+//
+//        $game->update($validated);
+//
+//        return redirect()->route('dashboard')->with('success', 'Game succesvol bijgewerkt!');
     }
 
     /**
@@ -92,7 +120,15 @@ class GameController extends Controller
      */
     public function destroy(string $id)
     {
+        $user = auth()->user();
+
+        // Controle: alleen admin of eigenaar mag verwijderen
+        if (!$user || (!$user->isAdmin() && $user->id !== $game->user_id)) {
+            abort(403, 'Je hebt geen rechten om deze game te verwijderen.');
+        }
+
         $game->delete();
+
         return redirect()->route('dashboard')->with('success', 'Game succesvol verwijderd!');
     }
 }
