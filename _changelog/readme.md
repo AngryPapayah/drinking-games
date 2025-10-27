@@ -109,6 +109,19 @@ had. Ik heb de teamskanaal gelijk uit de hidden kanalen gedaan en het via drawsq
 ![Form/create](image/form.png)
 
 # 21-10-2025 Database proberen te fixen
+INVULLEN!!!
+
+# 27-10-2025
+Na de vakantie ben ik snel weer aan de slag gegaan omdat ik best wel achter liep. Mijn database werkte nog niet en ik heb dubbel zitten werken in mijn project.
+Op deze dag heb ik alles even recht gezet en proberen bij te lopen.
+
+## Before
+![Before](image/homepage.png)
+
+## After + database kunnen linken
+![Mijn Homepage nu](image/dashboardchange.png)
+
+![Mijn code](image/database-linked.png)
 
 
 
