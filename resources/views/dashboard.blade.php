@@ -39,7 +39,7 @@
 
                         <div class="flex justify-between text-sm text-gray-500 dark:text-gray-400 mt-3">
                             <span>👥 {{ $game->total_players }} players</span>
-                            <span>{{ $game->gameType->name ?? 'N/A' }}</span>
+                            <span>{{ $game->user->name ?? 'Unknown' }}</span>
                         </div>
 
                         {{-- 🔹 Actieknoppen --}}
