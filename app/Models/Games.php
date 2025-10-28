@@ -24,4 +24,9 @@ class Games extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function gameType()
+    {
+        return $this->belongsTo(GameType::class);
+    }
 }

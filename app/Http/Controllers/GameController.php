@@ -25,13 +25,38 @@ class GameController extends Controller
     }
 
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
-        // Haal alle games op uit de database
-        $games = Games::all();
+        // Start query en laad relaties (user + gameType)
+        $query = Games::query()->with(['user', 'gameType']);
 
-        // Stuur ze door naar de dashboard view
-        return view('dashboard', compact('games'));
+        // 🔍 Zoek op naam of beschrijving
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
+
+        // 🧩 Filter op game type
+        if ($request->filled('game_type')) {
+            $query->where('game_type_id', $request->input('game_type'));
+        }
+
+        // 👥 Filter op minimaal aantal spelers
+        if ($request->filled('players')) {
+            $query->where('total_players', '>=', $request->input('players'));
+        }
+
+        // 📦 Haal de resultaten op
+        $games = $query->get();
+
+        // 🔹 Alle game types voor de dropdown
+        $gameTypes = GameType::all();
+
+        // Stuur alles naar de view
+        return view('dashboard', compact('games', 'gameTypes'));
     }
 
 

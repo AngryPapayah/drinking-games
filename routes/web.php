@@ -3,6 +3,7 @@
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', [GameController::class, 'dashboard'])->name('home');
 
@@ -28,6 +29,10 @@ Route::get('/about-us', function () {
     return view('about-us', [
         'company' => $company
     ]);
+});
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
 
 Route::resource('games', GameController::class);

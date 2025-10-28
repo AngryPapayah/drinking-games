@@ -23,6 +23,46 @@
             </div>
         </div>
 
+        {{-- 🔍 Search & Filter --}}
+        <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg p-6 mb-6">
+            <form method="GET" action="{{ route('dashboard') }}" class="flex flex-col sm:flex-row gap-4">
+                {{-- Zoekbalk --}}
+                <input type="text" name="search" value="{{ request('search') }}"
+                       placeholder="Zoek een game..."
+                       class="flex-1 px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700
+                      bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100
+                      focus:ring-indigo-500 focus:border-indigo-500"/>
+
+                {{-- Filter op game type --}}
+                <select name="game_type"
+                        class="px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700
+                       bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100">
+                    <option value="">Alle types</option>
+                    @foreach($gameTypes as $type)
+                        <option value="{{ $type->id }}" {{ request('game_type') == $type->id ? 'selected' : '' }}>
+                            {{ $type->name }}
+                        </option>
+                    @endforeach
+                </select>
+
+                {{-- Filter op aantal spelers --}}
+                <select name="players"
+                        class="px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700
+                       bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100">
+                    <option value="">Alle spelers</option>
+                    <option value="2" {{ request('players') == 2 ? 'selected' : '' }}>2+</option>
+                    <option value="4" {{ request('players') == 4 ? 'selected' : '' }}>4+</option>
+                    <option value="6" {{ request('players') == 6 ? 'selected' : '' }}>6+</option>
+                </select>
+
+                {{-- Filterknop --}}
+                <button type="submit"
+                        class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">
+                    Filteren
+                </button>
+            </form>
+        </div>
+
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @forelse ($games as $game)
                 <div
