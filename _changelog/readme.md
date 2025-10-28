@@ -106,7 +106,7 @@ had. Ik heb de teamskanaal gelijk uit de hidden kanalen gedaan en het via drawsq
 # 15-10-25 Homepage fix + Create form
 
 ![Homepage](image/homepage.png)
-![Form/create](image/form.png)
+![Form/create](image/create.png)
 
 # 21-10-2025 Database proberen te fixen
 INVULLEN!!!
@@ -127,6 +127,7 @@ Op deze dag heb ik alles even recht gezet en proberen bij te lopen.
 # 28-10-2025 
 Hier heb ik de filter systeem erin gezet. Helaas werkt hij nog niet, dus moet ik dat nog even aanpassen.
 ![Filter systeem erin gezet](image/filter-plus-taal-veranderd.png)
+
 
 
 
