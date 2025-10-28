@@ -28,7 +28,7 @@
             <form method="GET" action="{{ route('dashboard') }}" class="flex flex-col sm:flex-row gap-4">
                 {{-- Zoekbalk --}}
                 <input type="text" name="search" value="{{ request('search') }}"
-                       placeholder="Zoek een game..."
+                       placeholder="Search game..."
                        class="flex-1 px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700
                       bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100
                       focus:ring-indigo-500 focus:border-indigo-500"/>
@@ -37,7 +37,7 @@
                 <select name="game_type"
                         class="px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700
                        bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100">
-                    <option value="">Alle types</option>
+                    <option value="">All types</option>
                     @foreach($gameTypes as $type)
                         <option value="{{ $type->id }}" {{ request('game_type') == $type->id ? 'selected' : '' }}>
                             {{ $type->name }}
@@ -58,7 +58,7 @@
                 {{-- Filterknop --}}
                 <button type="submit"
                         class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">
-                    Filteren
+                    Filter
                 </button>
             </form>
         </div>
@@ -88,7 +88,7 @@
                             {{-- Bekijk --}}
                             <a href="{{ route('games.show', $game->id) }}"
                                class="px-3 py-1 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition">
-                                Bekijk
+                                View
                             </a>
 
                             {{-- Bewerken (Admin of eigenaar) --}}
@@ -96,7 +96,7 @@
                                 @if(auth()->user()->isAdmin() || auth()->user()->id === $game->user_id)
                                     <a href="{{ route('games.edit', $game->id) }}"
                                        class="px-3 py-1 bg-yellow-500 text-white text-sm rounded-md hover:bg-yellow-600 transition">
-                                        Bewerken
+                                        Edit
                                     </a>
                                 @endif
 
@@ -109,7 +109,7 @@
                                         @method('DELETE')
                                         <button type="submit"
                                                 class="px-3 py-1 bg-red-600 text-white text-sm rounded-md hover:bg-red-700 transition">
-                                            Verwijderen
+                                            Delete
                                         </button>
                                     </form>
                                 @endif
