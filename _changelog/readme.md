@@ -123,10 +123,14 @@ Op deze dag heb ik alles even recht gezet en proberen bij te lopen.
 
 ![Mijn code](image/database-linked.png)
 
+## Create CSS aangepast
+![After form](image/create-update.png)
+
 
 # 28-10-2025 
 Hier heb ik de filter systeem erin gezet. Helaas werkt hij nog niet, dus moet ik dat nog even aanpassen.
 ![Filter systeem erin gezet](image/filter-plus-taal-veranderd.png)
+
 
 
 
