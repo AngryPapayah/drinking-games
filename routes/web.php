@@ -31,9 +31,13 @@ Route::get('/about-us', function () {
     ]);
 });
 
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-});
+Route::get('/admin/dashboard', function () {
+    if (!auth()->check() || auth()->user()->role_id !== 1) {
+        abort(403, 'Unauthorized access');
+    }
+
+    return app(AdminController::class)->dashboard();
+})->name('admin.dashboard');
 
 Route::resource('games', GameController::class);
 

@@ -25,7 +25,7 @@
 
                         <div class="flex items-center space-x-2">
                             <span class="font-semibold">🎲 Type:</span>
-                            <span>{{ ucfirst($game->game_type_id) }}</span>
+                            <span>{{ $game->gameType->name ?? 'Unknown' }}</span>
                         </div>
 
                         <div class="flex items-center space-x-2">

@@ -1,13 +1,26 @@
 <x-app-layout>
     <x-slot name="header">
-        <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            @if(Auth::check())
-                Welcome, {{ Auth::user()->name }}
-            @else
-                Welcome, Guest
-            @endif
-        </h1>
+        <div class="flex justify-between items-center">
+            <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                @if(Auth::check())
+                    Welcome, {{ Auth::user()->name }}
+                @else
+                    Welcome, Guest
+                @endif
+            </h1>
+
+            {{-- Alleen voor Admins --}}
+            @auth
+                @if(Auth::user()->role_id === 1)
+                    <a href="{{ route('admin.dashboard') }}"
+                       class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition">
+                        🛠️ Admin Dashboard
+                    </a>
+                @endif
+            @endauth
+        </div>
     </x-slot>
+
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
@@ -49,7 +62,7 @@
                 <select name="players"
                         class="px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700
                        bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100">
-                    <option value="">Alle spelers</option>
+                    <option value="">All players</option>
                     <option value="2" {{ request('players') == 2 ? 'selected' : '' }}>2+</option>
                     <option value="4" {{ request('players') == 4 ? 'selected' : '' }}>4+</option>
                     <option value="6" {{ request('players') == 6 ? 'selected' : '' }}>6+</option>
@@ -103,7 +116,7 @@
                                 {{-- Verwijderen (alleen Admin) --}}
                                 @if(auth()->user()->isAdmin() || auth()->user()->id === $game->user_id)
                                     <form action="{{ route('games.destroy', $game->id) }}" method="POST"
-                                          onsubmit="return confirm('Weet je zeker dat je deze game wilt verwijderen?')"
+                                          onsubmit="return confirm('Are you sure to delete this game??')"
                                           class="inline">
                                         @csrf
                                         @method('DELETE')
