@@ -5,27 +5,20 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
-// 👇 Openbare routes (ook voor gasten)
+// 🌍 Openbaar
 Route::get('/', [GameController::class, 'dashboard'])->name('home');
 Route::get('/dashboard', [GameController::class, 'dashboard'])->name('dashboard');
 Route::get('/games/{game}', [GameController::class, 'show'])->name('games.show');
 
-Route::get('/about-us', function () {
-    $company = 'BoozeBuddies';
-    return view('about-us', ['company' => $company]);
-})->name('about');
+Route::view('/about-us', 'about-us', ['company' => 'BoozeBuddies'])->name('about');
+Route::view('/contact-page', 'contact-page')->name('contact-page');
 
-Route::get('/contact-page', function () {
-    return view('contact-page');
-})->name('contact-page');
-
-// 👇 Alleen ingelogde gebruikers
+// 🔐 Ingelogd (user + admin)
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Alleen voor ingelogden: games aanmaken / aanpassen / verwijderen
     Route::get('/games/create', [GameController::class, 'create'])->name('games.create');
     Route::post('/games', [GameController::class, 'store'])->name('games.store');
     Route::get('/games/{game}/edit', [GameController::class, 'edit'])->name('games.edit');
@@ -33,12 +26,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/games/{game}', [GameController::class, 'destroy'])->name('games.destroy');
 });
 
-// 👇 Alleen admins
-Route::get('/admin/dashboard', function () {
-    if (!auth()->check() || auth()->user()->role_id !== 1) {
-        abort(403, 'Unauthorized access');
-    }
-    return app(AdminController::class)->dashboard();
-})->name('admin.dashboard');
+// 🛠️ Alleen admin
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+});
 
+// Auth scaffolding
 require __DIR__ . '/auth.php';

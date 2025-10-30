@@ -6,31 +6,18 @@ use Illuminate\Http\Request;
 use App\Models\Games;
 use App\Models\GameType;
 
-//use function Laravel\Prompts\error;
-
 class GameController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-//    public function home()
-//    {
-//        $games = Games::all();
-//        return view('games.index', compact('games'));
-//    }
     public function index()
     {
         $games = Games::all();
         return view('games.index', compact('games'));
     }
 
-
     public function dashboard(Request $request)
     {
-        // Start query en laad relaties (user + gameType)
         $query = Games::query()->with(['user', 'gameType']);
 
-        // 🔍 Zoek op naam of beschrijving
         if ($request->filled('search')) {
             $search = $request->input('search');
             $query->where(function ($q) use ($search) {
@@ -39,115 +26,75 @@ class GameController extends Controller
             });
         }
 
-        // 🧩 Filter op game type
         if ($request->filled('game_type')) {
             $query->where('game_type_id', $request->input('game_type'));
         }
 
-        // 👥 Filter op minimaal aantal spelers
         if ($request->filled('players')) {
             $query->where('total_players', '>=', $request->input('players'));
         }
 
-        // 📦 Haal de resultaten op
         $games = $query->get();
-
-        // 🔹 Alle game types voor de dropdown
         $gameTypes = GameType::all();
 
-        // Stuur alles naar de view
         return view('dashboard', compact('games', 'gameTypes'));
     }
-
 
     public function show(Games $game)
     {
         return view('games.show', compact('game'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        // Alleen ingelogde gebruikers mogen games toevoegen
-        if (!auth()->check()) {
-            abort(403, 'Je moet ingelogd zijn om een game toe te voegen.');
-        }
-
-        $gameTypes = GameType::all();
+        $gameTypes = GameType::all(); // haalt alle types op uit de database
         return view('games.create', compact('gameTypes'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-
     public function store(Request $request)
     {
-        if (!auth()->check()) {
-            abort(403, 'Je moet ingelogd zijn om een game toe te voegen.');
-        }
-
         $validated = $request->validate([
             'name' => 'required|unique:games|max:255',
             'description' => 'required',
             'total_players' => 'required|integer|min:1',
-            'user_id' => 'required|integer',
             'game_type_id' => 'required|integer|exists:game_types,id',
         ]);
 
+        // 👇 Zet user_id server-side (veiliger dan hidden input)
+        $validated['user_id'] = auth()->id();
 
         Games::create($validated);
 
         return redirect()->route('dashboard')->with('success', 'Game succesvol toegevoegd!');
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Games $game) // ✅ gebruik model binding i.p.v. string $id
     {
-        // Alleen admins mogen games bewerken
-        if (!auth()->user() || !auth()->user()->isAdmin()) {
-            abort(403, 'Alleen admins mogen games bewerken.');
-        }
-
         $gameTypes = GameType::all();
         return view('games.edit', compact('game', 'gameTypes'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Games $game) // ✅ model binding
     {
-//        if (!auth()->user() || !auth()->user()->isAdmin()) {
-//            abort(403, 'Alleen admins mogen games bijwerken.');
-//        }
-//
-//        $validated = $request->validate([
-//            'name' => 'required|max:255|unique:games,name,' . $game->id,
-//            'description' => 'required',
-//            'total_players' => 'required|integer|min:1',
-//            'user_id' => 'required|integer',
-//            'game_type_id' => 'required|integer|exists:game_types,id',
-//        ]);
-//
-//        $game->update($validated);
-//
-//        return redirect()->route('dashboard')->with('success', 'Game succesvol bijgewerkt!');
+        // if (!auth()->user()?->isAdmin()) abort(403);
+
+        $validated = $request->validate([
+            'name' => 'required|max:255|unique:games,name,' . $game->id,
+            'description' => 'required',
+            'total_players' => 'required|integer|min:1',
+            'game_type_id' => 'required|integer|exists:game_types,id',
+        ]);
+
+        $game->update($validated);
+
+        return redirect()->route('dashboard')->with('success', 'Game succesvol bijgewerkt!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Games $game) // ✅ model binding
     {
         $user = auth()->user();
 
-        // Controle: alleen admin of eigenaar mag verwijderen
+        // ✅ $game bestaat nu; check eigenaar of admin
         if (!$user || (!$user->isAdmin() && $user->id !== $game->user_id)) {
             abort(403, 'Je hebt geen rechten om deze game te verwijderen.');
         }
