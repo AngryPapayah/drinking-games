@@ -12,7 +12,6 @@
                 <form method="POST" action="{{ route('games.store') }}" class="space-y-6">
                     @csrf
 
-                    Game Name
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Name of Game
@@ -30,7 +29,6 @@
                         @enderror
                     </div>
 
-                    Description
                     <div>
                         <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Summary
@@ -47,7 +45,6 @@
                         @enderror
                     </div>
 
-                    Max Players
                     <div>
                         <label for="total_players" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Max Players
@@ -66,7 +63,7 @@
                         @enderror
                     </div>
 
-                    Game Type
+
                     <div>
                         <label for="game_type_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Game Type
@@ -90,10 +87,9 @@
                         @enderror
                     </div>
 
-                    Hidden User ID
                     <input type="hidden" name="user_id" value="{{ auth()->id() }}"/>
 
-                    Submit Button
+
                     <div class="flex justify-end">
                         <button
                             type="submit"
@@ -107,3 +103,4 @@
         </div>
     </div>
 </x-app-layout>
+

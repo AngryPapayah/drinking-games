@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Games;
 use App\Models\GameType;
+use Illuminate\Support\Facades\Auth;
 
 class GameController extends Controller
 {
@@ -16,6 +17,10 @@ class GameController extends Controller
 
     public function dashboard(Request $request)
     {
+        if (auth()->check() && auth()->user()->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
+
         $query = Games::query()->with(['user', 'gameType']);
 
         if ($request->filled('search')) {
@@ -60,10 +65,14 @@ class GameController extends Controller
             'game_type_id' => 'required|integer|exists:game_types,id',
         ]);
 
-        // 👇 Zet user_id server-side (veiliger dan hidden input)
-        $validated['user_id'] = auth()->id();
+        $validated['user_id'] = Auth::id(); // of auth()->id()
 
         Games::create($validated);
+
+        // ✅ Check rol van gebruiker
+        if (Auth::user()->role === 'admin') {
+            return redirect()->route('admin.dashboard')->with('success', 'Game succesvol toegevoegd (admin)!');
+        }
 
         return redirect()->route('dashboard')->with('success', 'Game succesvol toegevoegd!');
     }

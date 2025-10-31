@@ -100,7 +100,7 @@
                                     </a>
                                 @endif
 
-                                {{-- Verwijderen (alleen Admin) --}}
+                                {{--                                Verwijderen (alleen Admin)--}}
                                 @if(auth()->user()->isAdmin() || auth()->user()->id === $game->user_id)
                                     <form action="{{ route('games.destroy', $game->id) }}" method="POST"
                                           onsubmit="return confirm('Are you sure to delete this game??')"
