@@ -26,9 +26,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/games/{game}', [GameController::class, 'destroy'])->name('games.destroy');
 });
 
-
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])
+        ->name('admin.dashboard');
 });
 
 // Auth scaffolding
