@@ -103,7 +103,7 @@ class GameController extends Controller
 
         $game->update($validated);
 
-        return redirect()->route('dashboard')->with('success', 'Game succesvol bijgewerkt!');
+        return redirect()->route('dashboard')->with('Game updated!');
     }
 
     public function destroy(Games $game) // model binding
@@ -117,7 +117,7 @@ class GameController extends Controller
         // Admins mogen altijd verwijderen
         if ($user->isAdmin()) {
             $game->delete();
-            return redirect()->route('dashboard')->with('success', 'Game deleted successfully!');
+            return redirect()->route('dashboard')->with('Game deleted successfully!');
         }
 
         // mogen alleen eigen games verwijderen
@@ -134,6 +134,6 @@ class GameController extends Controller
 
         $game->delete();
 
-        return redirect()->route('dashboard')->with('success', 'Game deleted successfully!');
+        return redirect()->route('dashboard')->with('Game deleted successfully!');
     }
 }
