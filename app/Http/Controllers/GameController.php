@@ -81,7 +81,7 @@ class GameController extends Controller
         return redirect()->route('dashboard')->with('success', 'Game succesvol toegevoegd!');
     }
 
-    public function edit(Games $game) // gebruik model binding i.p.v. string $id
+    public function edit(Games $game)
     {
         $gameTypes = GameType::all();
 
