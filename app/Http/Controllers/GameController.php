@@ -17,10 +17,17 @@ class GameController extends Controller
 
     public function dashboard(Request $request)
     {
-        if (auth()->check() && auth()->user()->role === 'admin') {
+        $user = auth()->user();
+
+        // ✅ Als de ingelogde gebruiker admin is → direct doorsturen
+        // Pas dit aan op basis van jouw setup:
+        // - gebruik role_id (bijv. 2 = admin)
+        // - of role->name === 'admin' als je een relatie gebruikt
+        if ($user && ($user->role_id == 1 || $user->role?->name === 'admin')) {
             return redirect()->route('admin.dashboard');
         }
 
+        // 🧩 Normaal gebruikersdashboard
         $query = Games::query()->with(['user', 'gameType']);
 
         if ($request->filled('search')) {
