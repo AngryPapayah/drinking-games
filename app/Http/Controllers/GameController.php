@@ -19,15 +19,12 @@ class GameController extends Controller
     {
         $user = auth()->user();
 
-        // ✅ Als de ingelogde gebruiker admin is → direct doorsturen
-        // Pas dit aan op basis van jouw setup:
-        // - gebruik role_id (bijv. 2 = admin)
-        // - of role->name === 'admin' als je een relatie gebruikt
+        //  Als de ingelogde gebruiker admin is direct doorsturen
         if ($user && ($user->role_id == 1 || $user->role?->name === 'admin')) {
             return redirect()->route('admin.dashboard');
         }
 
-        // 🧩 Normaal gebruikersdashboard
+        // Normaal gebruikersdashboard
         $query = Games::query()->with(['user', 'gameType']);
 
         if ($request->filled('search')) {
@@ -76,7 +73,7 @@ class GameController extends Controller
 
         Games::create($validated);
 
-        // ✅ Check rol van gebruiker
+        // Check rol van gebruiker
         if (Auth::user()->role === 'admin') {
             return redirect()->route('admin.dashboard')->with('success', 'Game succesvol toegevoegd (admin)!');
         }
@@ -84,15 +81,18 @@ class GameController extends Controller
         return redirect()->route('dashboard')->with('success', 'Game succesvol toegevoegd!');
     }
 
-    public function edit(Games $game) // ✅ gebruik model binding i.p.v. string $id
+    public function edit(Games $game) // gebruik model binding i.p.v. string $id
     {
         $gameTypes = GameType::all();
-        return view('games.edit', compact('game', 'gameTypes'));
+
+        return view('games.edit', [
+            'game' => $game,
+            'gameTypes' => $gameTypes,
+        ]);
     }
 
-    public function update(Request $request, Games $game) // ✅ model binding
+    public function update(Request $request, Games $game) // model binding
     {
-        // if (!auth()->user()?->isAdmin()) abort(403);
 
         $validated = $request->validate([
             'name' => 'required|max:255|unique:games,name,' . $game->id,
@@ -114,18 +114,18 @@ class GameController extends Controller
             abort(403, 'You must be logged in to perform this action.');
         }
 
-        // ✅ Admins mogen altijd verwijderen
+        // Admins mogen altijd verwijderen
         if ($user->isAdmin()) {
             $game->delete();
             return redirect()->route('dashboard')->with('success', 'Game deleted successfully!');
         }
 
-        // ✅ Gewone gebruikers: mogen alleen eigen games verwijderen
+        // mogen alleen eigen games verwijderen
         if ($user->id !== $game->user_id) {
             abort(403, 'You can only delete your own game.');
         }
 
-        // ✅ Diepere validatie
+        //Diepere validatie
         $gameCount = Games::where('user_id', $user->id)->count();
 
         if ($gameCount < 3) {

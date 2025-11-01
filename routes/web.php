@@ -5,7 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
-// 🌍 Openbaar
+// Openbaar
 Route::get('/', [GameController::class, 'dashboard'])->name('home');
 Route::get('/games/create', [GameController::class, 'create'])->name('games.create');
 Route::get('/dashboard', [GameController::class, 'dashboard'])->name('dashboard');
@@ -14,7 +14,7 @@ Route::get('/games/{game}', [GameController::class, 'show'])->name('games.show')
 Route::view('/about-us', 'about-us', ['company' => 'BoozeBuddies'])->name('about');
 Route::view('/contact-page', 'contact-page')->name('contact-page');
 
-// 🔐 Ingelogd (user + admin)
+//Ingelogd (user + admin)
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -2,7 +2,6 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
 
-            <!-- ✅ Left side: Logo + Links -->
             <div class="flex items-center space-x-8">
                 <!-- Logo -->
                 <a href="{{ route('dashboard') }}" class="flex items-center space-x-2">
@@ -36,7 +35,7 @@
                     @if (Route::has('register'))
                         <a href="{{ route('register') }}"
                            class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition">
-                            📝 Register
+                            Register
                         </a>
                     @endif
                 @endguest
@@ -131,12 +130,12 @@
             <div class="pt-4 pb-4 border-t border-gray-200 dark:border-gray-600 text-center space-y-2">
                 <a href="{{ route('login') }}"
                    class="block mx-auto px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">
-                    🔑 Log in
+                    Log in
                 </a>
                 @if (Route::has('register'))
                     <a href="{{ route('register') }}"
                        class="block mx-auto px-6 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition">
-                        📝 Register
+                        Register
                     </a>
                 @endif
             </div>

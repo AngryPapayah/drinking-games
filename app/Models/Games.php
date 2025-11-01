@@ -18,8 +18,6 @@ class Games extends Model
         'user_id',
         'game_type_id'];
 
-
-    // ✅ Relatie: een game behoort toe aan één user (maker)
     public function user()
     {
         return $this->belongsTo(User::class);
