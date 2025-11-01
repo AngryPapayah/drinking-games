@@ -49,7 +49,7 @@
             <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-800">
                 <thead class="bg-gray-100 dark:bg-gray-800/70 backdrop-blur-sm">
                 <tr>
-                    @foreach(['Name','Description','Type','Players','Actions'] as $heading)
+                    @foreach(['Name','Description','Type','Players','Posted By','Actions'] as $heading)
                         <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider
                                    text-gray-600 dark:text-gray-400">
                             {{ $heading }}
@@ -61,10 +61,28 @@
                 <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-100 dark:divide-gray-800">
                 @forelse($games as $game)
                     <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/70 transition-colors">
-                        <td class="px-6 py-4 text-gray-900 dark:text-gray-100 font-medium">{{ $game->name }}</td>
-                        <td class="px-6 py-4 text-gray-600 dark:text-gray-300">{{ Str::limit($game->description, 70) }}</td>
-                        <td class="px-6 py-4 text-gray-700 dark:text-gray-200">{{ $game->gameType->name ?? '-' }}</td>
-                        <td class="px-6 py-4 text-gray-700 dark:text-gray-200">{{ $game->total_players }}</td>
+                        <td class="px-6 py-4 text-gray-900 dark:text-gray-100 font-medium">
+                            {{ $game->name }}
+                        </td>
+
+                        <td class="px-6 py-4 text-gray-600 dark:text-gray-300">
+                            {{ Str::limit($game->description, 70) }}
+                        </td>
+
+                        <td class="px-6 py-4 text-gray-700 dark:text-gray-200">
+                            {{ $game->gameType->name ?? '-' }}
+                        </td>
+
+                        <td class="px-6 py-4 text-gray-700 dark:text-gray-200">
+                            {{ $game->total_players }}
+                        </td>
+
+                        <!-- 🧑‍💻 Posted By -->
+                        <td class="px-6 py-4 text-indigo-600 dark:text-indigo-400 font-medium">
+                            {{ $game->user->name ?? 'Unknown' }}
+                        </td>
+
+                        <!-- ⚙️ Actions -->
                         <td class="px-6 py-4 flex items-center gap-3">
                             <a href="{{ route('games.show', $game->id) }}"
                                class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium transition">
@@ -88,7 +106,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="px-6 py-6 text-center text-gray-500 dark:text-gray-400 italic">
+                        <td colspan="6" class="px-6 py-6 text-center text-gray-500 dark:text-gray-400 italic">
                             No games found — time to create a new one!
                         </td>
                     </tr>

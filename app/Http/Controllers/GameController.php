@@ -106,33 +106,34 @@ class GameController extends Controller
         return redirect()->route('dashboard')->with('success', 'Game succesvol bijgewerkt!');
     }
 
-    public function destroy(Games $game) // ✅ model binding
+    public function destroy(Games $game) // model binding
     {
         $user = auth()->user();
 
-        // alleen ingelogde gebruikers
         if (!$user) {
             abort(403, 'You must be logged in to perform this action.');
         }
 
-        // als user GEEN admin is extra validatie
-        if (!$user->isAdmin()) {
-            // Mag alleen zijn eigen games verwijderen
-            if ($user->id !== $game->user_id) {
-                abort(403, 'You can only delete your own game');
-            }
-
-            // 🔍 Diepere validatie: moet minstens 3 games hebben toegevoegd
-            $gameCount = Games::where('user_id', $user->id)->count();
-
-            if ($gameCount < 3) {
-                return back()->withErrors('You must have added at least 3 games before you can delete one.');
-            }
+        // ✅ Admins mogen altijd verwijderen
+        if ($user->isAdmin()) {
+            $game->delete();
+            return redirect()->route('dashboard')->with('success', 'Game deleted successfully!');
         }
 
-        // Admins mogen altijd verwijderen
+        // ✅ Gewone gebruikers: mogen alleen eigen games verwijderen
+        if ($user->id !== $game->user_id) {
+            abort(403, 'You can only delete your own game.');
+        }
+
+        // ✅ Diepere validatie
+        $gameCount = Games::where('user_id', $user->id)->count();
+
+        if ($gameCount < 3) {
+            return back()->withErrors('You must have added at least 3 games before you can delete one.');
+        }
+
         $game->delete();
 
-        return redirect()->route('dashboard')->with('Game deleted successfully!');
+        return redirect()->route('dashboard')->with('success', 'Game deleted successfully!');
     }
 }
