@@ -110,13 +110,29 @@ class GameController extends Controller
     {
         $user = auth()->user();
 
-        // ✅ $game bestaat nu; check eigenaar of admin
-        if (!$user || (!$user->isAdmin() && $user->id !== $game->user_id)) {
-            abort(403, 'Je hebt geen rechten om deze game te verwijderen.');
+        // alleen ingelogde gebruikers
+        if (!$user) {
+            abort(403, 'You must be logged in to perform this action.');
         }
 
+        // als user GEEN admin is extra validatie
+        if (!$user->isAdmin()) {
+            // Mag alleen zijn eigen games verwijderen
+            if ($user->id !== $game->user_id) {
+                abort(403, 'You can only delete your own game');
+            }
+
+            // 🔍 Diepere validatie: moet minstens 3 games hebben toegevoegd
+            $gameCount = Games::where('user_id', $user->id)->count();
+
+            if ($gameCount < 3) {
+                return back()->withErrors('You must have added at least 3 games before you can delete one.');
+            }
+        }
+
+        // Admins mogen altijd verwijderen
         $game->delete();
 
-        return redirect()->route('dashboard')->with('success', 'Game succesvol verwijderd!');
+        return redirect()->route('dashboard')->with('Game deleted successfully!');
     }
 }
