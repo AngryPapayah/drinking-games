@@ -16,8 +16,6 @@
             <div
                 class="relative flex items-start gap-3 p-4 mb-6 rounded-xl border border-red-300 dark:border-red-700
                bg-red-50 dark:bg-red-900/30 text-red-800 dark:text-red-300 shadow-sm animate-fade-in">
-
-                {{-- Message list --}}
                 <div>
                     <p class="font-semibold">There was a problem with your request:</p>
                     <ul class="list-disc list-inside mt-1 space-y-0.5">
@@ -29,67 +27,68 @@
             </div>
         @endif
 
-
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            {{-- Add Game Button --}}
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    @auth
-                        <a href="{{ route('games.create') }}"
-                           class="inline-block px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">
-                            + Add Drinking Game
-                        </a>
-                    @endauth
-                </div>
+        {{-- Add Game Button --}}
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 text-gray-900 dark:text-gray-100">
+                @auth
+                    <a href="{{ route('games.create') }}"
+                       class="inline-block px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">
+                        + Add Drinking Game
+                    </a>
+                @endauth
             </div>
+        </div>
 
-            {{-- 🔍 Search & Filter --}}
-            <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg p-6 mb-6">
-                <form method="GET" action="{{ route('dashboard') }}" class="flex flex-col sm:flex-row gap-4">
-                    {{-- Zoekbalk --}}
-                    <input type="text" name="search" value="{{ request('search') }}"
-                           placeholder="Search game..."
-                           class="flex-1 px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700
+        {{-- Search & Filter --}}
+        <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg p-6 mb-6">
+            <form method="GET" action="{{ route('dashboard') }}" class="flex flex-col sm:flex-row gap-4">
+                {{-- Zoekbalk --}}
+                <input type="text" name="search" value="{{ request('search') }}"
+                       placeholder="Search game..."
+                       class="flex-1 px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700
                       bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100
                       focus:ring-indigo-500 focus:border-indigo-500"/>
 
-                    {{-- Filter op game type --}}
-                    <select name="game_type"
-                            class="px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700
+                {{-- Filter op game type --}}
+                <select name="game_type"
+                        class="px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700
                        bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100">
-                        <option value="">All types</option>
-                        @foreach($gameTypes as $type)
-                            <option value="{{ $type->id }}" {{ request('game_type') == $type->id ? 'selected' : '' }}>
-                                {{ $type->name }}
-                            </option>
-                        @endforeach
-                    </select>
+                    <option value="">All types</option>
+                    @foreach($gameTypes as $type)
+                        <option value="{{ $type->id }}" {{ request('game_type') == $type->id ? 'selected' : '' }}>
+                            {{ $type->name }}
+                        </option>
+                    @endforeach
+                </select>
 
-                    {{-- Filter op aantal spelers --}}
-                    <select name="players"
-                            class="px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700
+                {{-- Filter op aantal spelers --}}
+                <select name="players"
+                        class="px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700
                        bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100">
-                        <option value="">All players</option>
-                        <option value="2" {{ request('players') == 2 ? 'selected' : '' }}>2+</option>
-                        <option value="4" {{ request('players') == 4 ? 'selected' : '' }}>4+</option>
-                        <option value="6" {{ request('players') == 6 ? 'selected' : '' }}>6+</option>
-                    </select>
+                    <option value="">All players</option>
+                    <option value="2" {{ request('players') == 2 ? 'selected' : '' }}>2+</option>
+                    <option value="4" {{ request('players') == 4 ? 'selected' : '' }}>4+</option>
+                    <option value="6" {{ request('players') == 6 ? 'selected' : '' }}>6+</option>
+                </select>
 
-                    {{-- Filterknop --}}
-                    <button type="submit"
-                            class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">
-                        Filter
-                    </button>
-                </form>
-            </div>
+                {{-- Filterknop --}}
+                <button type="submit"
+                        class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">
+                    Filter
+                </button>
+            </form>
+        </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                @forelse ($games as $game)
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            @forelse ($games as $game)
+
+                {{-- Alleen tonen als zichtbaar OF als de eigenaar of admin het is --}}
+                @if($game->is_visible || (Auth::check() && (Auth::user()->isAdmin() || Auth::user()->id === $game->user_id)))
                     <div
-                        class="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition transform hover:-translate-y-1">
+                        class="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition transform hover:-translate-y-1 relative">
                         <div class="p-6 space-y-3">
                             {{-- Game Info --}}
-                            <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100">
+                            <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100 flex items-center gap-2">
                                 {{ $game->name }}
                             </h2>
 
@@ -102,7 +101,7 @@
                                 <span>{{ $game->user->name ?? 'Unknown' }}</span>
                             </div>
 
-                            {{-- 🔹 Actieknoppen --}}
+                            {{-- Actieknoppen --}}
                             <div
                                 class="flex justify-between items-center mt-4 pt-3 border-t border-gray-200 dark:border-gray-700">
                                 {{-- Bekijk --}}
@@ -111,8 +110,8 @@
                                     View
                                 </a>
 
-                                {{-- Bewerken (Admin of eigenaar) --}}
                                 @auth
+                                    {{-- Bewerken --}}
                                     @if(auth()->user()->isAdmin() || auth()->user()->id === $game->user_id)
                                         <a href="{{ route('games.edit', $game->id) }}"
                                            class="px-3 py-1 bg-yellow-500 text-white text-sm rounded-md hover:bg-yellow-600 transition">
@@ -120,7 +119,7 @@
                                         </a>
                                     @endif
 
-                                    {{--                                Verwijderen (alleen Admin)--}}
+                                    {{-- Verwijderen --}}
                                     @if(auth()->user()->isAdmin() || auth()->user()->id === $game->user_id)
                                         <form action="{{ route('games.destroy', $game->id) }}" method="POST"
                                               onsubmit="return confirm('Are you sure to delete this game??')"
@@ -135,14 +134,15 @@
                                     @endif
                                 @endauth
                             </div>
-
                         </div>
                     </div>
-                @empty
-                    <div class="col-span-full text-center text-gray-500 dark:text-gray-400">
-                        No games found — add one above!
-                    </div>
-                @endforelse
-            </div>
+                @endif
+
+            @empty
+                <div class="col-span-full text-center text-gray-500 dark:text-gray-400">
+                    No games found — add one above!
+                </div>
+            @endforelse
         </div>
+    </div>
 </x-app-layout>

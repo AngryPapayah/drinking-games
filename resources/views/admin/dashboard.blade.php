@@ -49,7 +49,7 @@
             <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-800">
                 <thead class="bg-gray-100 dark:bg-gray-800/70 backdrop-blur-sm">
                 <tr>
-                    @foreach(['Name','Description','Type','Players','Posted By','Actions'] as $heading)
+                    @foreach(['Name','Description','Type','Players','Posted By','Visibility','Actions'] as $heading)
                         <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider
                                    text-gray-600 dark:text-gray-400">
                             {{ $heading }}
@@ -77,12 +77,24 @@
                             {{ $game->total_players }}
                         </td>
 
-                        <!-- 🧑‍💻 Posted By -->
                         <td class="px-6 py-4 text-indigo-600 dark:text-indigo-400 font-medium">
                             {{ $game->user->name ?? 'Unknown' }}
                         </td>
 
-                        <!-- ⚙️ Actions -->
+                        <!--Toggle -->
+                        <td class="px-6 py-4">
+                            <form method="POST" action="{{ route('admin.games.toggleVisibility', $game) }}"
+                                  class="inline toggle-form">
+                                @csrf
+                                <button type="submit"
+                                        class="px-3 py-1 rounded-lg text-white font-semibold transition
+                                        {{ $game->is_visible ? 'bg-green-600 hover:bg-green-700' : 'bg-gray-500 hover:bg-gray-600' }}">
+                                    {{ $game->is_visible ? 'Online' : 'Offline' }}
+                                </button>
+                            </form>
+                        </td>
+
+                        <!--Buttons -->
                         <td class="px-6 py-4 flex items-center gap-3">
                             <a href="{{ route('games.show', $game->id) }}"
                                class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium transition">
@@ -106,8 +118,8 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="px-6 py-6 text-center text-gray-500 dark:text-gray-400 italic">
-                            No games found — time to create a new one!
+                        <td colspan="7" class="px-6 py-6 text-center text-gray-500 dark:text-gray-400 italic">
+                            No games found, time to create a new one!
                         </td>
                     </tr>
                 @endforelse
@@ -115,4 +127,5 @@
             </table>
         </div>
     </div>
+
 </x-app-layout>

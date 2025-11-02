@@ -9,24 +9,21 @@ use Illuminate\Support\Facades\Auth;
 
 class GameController extends Controller
 {
-    public function index()
-    {
-        $games = Games::all();
-        return view('games.index', compact('games'));
-    }
-
     public function dashboard(Request $request)
     {
         $user = auth()->user();
 
-        //  Als de ingelogde gebruiker admin is direct doorsturen
+        // Admins direct naar admin dashboard
         if ($user && ($user->role_id == 1 || $user->role?->name === 'admin')) {
             return redirect()->route('admin.dashboard');
         }
 
-        // Normaal gebruikersdashboard
-        $query = Games::query()->with(['user', 'gameType']);
+        // Normaal gebruikersdashboard — alleen zichtbare games
+        $query = Games::query()
+            ->with(['user', 'gameType'])
+            ->where('is_visible', true);
 
+        // Zoekfunctie
         if ($request->filled('search')) {
             $search = $request->input('search');
             $query->where(function ($q) use ($search) {
@@ -35,10 +32,12 @@ class GameController extends Controller
             });
         }
 
+        // Filter op type
         if ($request->filled('game_type')) {
             $query->where('game_type_id', $request->input('game_type'));
         }
 
+        // Filter op aantal spelers
         if ($request->filled('players')) {
             $query->where('total_players', '>=', $request->input('players'));
         }
@@ -51,12 +50,17 @@ class GameController extends Controller
 
     public function show(Games $game)
     {
+        // Alleen admin mag verborgen games bekijken
+        if (!$game->is_visible && (!auth()->check() || auth()->user()->role_id != 1)) {
+            abort(403, 'This game is not available to see');
+        }
+
         return view('games.show', compact('game'));
     }
 
     public function create()
     {
-        $gameTypes = GameType::all(); // haalt alle types op uit de database
+        $gameTypes = GameType::all();
         return view('games.create', compact('gameTypes'));
     }
 
@@ -69,16 +73,20 @@ class GameController extends Controller
             'game_type_id' => 'required|integer|exists:game_types,id',
         ]);
 
-        $validated['user_id'] = Auth::id(); // of auth()->id()
+        $validated['user_id'] = Auth::id();
+        // standaard zichtbaar bij aanmaken
+        $validated['is_visible'] = true;
 
         Games::create($validated);
 
-        // Check rol van gebruiker
-        if (Auth::user()->role === 'admin') {
-            return redirect()->route('admin.dashboard')->with('success', 'Game succesvol toegevoegd (admin)!');
+        // Redirect afhankelijk van rol
+        if (Auth::user()->role_id == 1) {
+            return redirect()->route('admin.dashboard')
+                ->with('Added a new game!');
         }
 
-        return redirect()->route('dashboard')->with('success', 'Game succesvol toegevoegd!');
+        return redirect()->route('dashboard')
+            ->with('Added a new game!');
     }
 
     public function edit(Games $game)
@@ -91,9 +99,8 @@ class GameController extends Controller
         ]);
     }
 
-    public function update(Request $request, Games $game) // model binding
+    public function update(Request $request, Games $game)
     {
-
         $validated = $request->validate([
             'name' => 'required|max:255|unique:games,name,' . $game->id,
             'description' => 'required',
@@ -103,10 +110,11 @@ class GameController extends Controller
 
         $game->update($validated);
 
-        return redirect()->route('dashboard')->with('Game updated!');
+        return redirect()->route('dashboard')
+            ->with('success', 'Game updated!');
     }
 
-    public function destroy(Games $game) // model binding
+    public function destroy(Games $game)
     {
         $user = auth()->user();
 
@@ -117,23 +125,24 @@ class GameController extends Controller
         // Admins mogen altijd verwijderen
         if ($user->isAdmin()) {
             $game->delete();
-            return redirect()->route('dashboard')->with('Game deleted successfully!');
+            return redirect()->route('dashboard')
+                ->with('success', 'Game deleted successfully!');
         }
 
-        // mogen alleen eigen games verwijderen
+        // Alleen eigen games verwijderen
         if ($user->id !== $game->user_id) {
             abort(403, 'You can only delete your own game.');
         }
 
-        //Diepere validatie
+        // Extra validatie: minstens 3 games
         $gameCount = Games::where('user_id', $user->id)->count();
-
         if ($gameCount < 3) {
             return back()->withErrors('You must have added at least 3 games before you can delete one.');
         }
 
         $game->delete();
 
-        return redirect()->route('dashboard')->with('Game deleted successfully!');
+        return redirect()->route('dashboard')
+            ->with('Game deleted successfully!');
     }
 }

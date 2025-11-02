@@ -17,4 +17,19 @@ class AdminController extends Controller
             'games' => $games,
         ]);
     }
+
+    public function toggleVisibility(Games $game)
+    {
+        $game->is_visible = !$game->is_visible;
+        $game->save();
+
+        if (request()->ajax()) {
+            return response()->json([
+                'success' => true,
+                'visible' => $game->is_visible,
+            ]);
+        }
+
+        return back()->with('status', 'Zichtbaarheid aangepast!');
+    }
 }
