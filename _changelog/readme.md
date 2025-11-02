@@ -39,47 +39,28 @@ zodat ik mijn eigen spelideeën met anderen kan delen.
 Als ingelogde gebruiker wil ik mijn eigen aangemaakte drankspellen kunnen bewerken,
 zodat ik fouten kan verbeteren of extra informatie kan toevoegen.
 
-## 3. Spellen verwijderen
+## 3. Spellen verwijderen (na 3 spellen toegevoegd
 
 Als ingelogde gebruiker wil ik mijn eigen spellen kunnen verwijderen,
 zodat ik controle heb over welke spellen zichtbaar blijven.
 
-## 4. Favorieten opslaan
+# User story Admin
 
-Als ingelogde gebruiker wil ik drankspellen kunnen toevoegen aan mijn favorietenlijst,
-zodat ik later snel mijn favoriete spellen terugvind.
+## 1. Overzicht 
+Als admin wil ik alle games oevrzichtelijk zien.
 
-## 5. Favorieten beheren
+## 2. Bewerken
+Als admin kan ik alle spellen bewerken.
 
-Als ingelogde gebruiker wil ik mijn favorietenlijst kunnen bekijken en spellen eruit verwijderen,
-zodat ik mijn lijst up-to-date kan houden met enkel de spellen die ik echt leuk vind
+## 3. Verwijderen
+Als admin kan ik alle spellen verwijderen van de gebruikers.
 
-# User story ingelogde gebruiker
+## 4. Toevoegen
+Als admin kan ik ook een eigen game aanmaken.
 
-## 1. Spellen aanmaken
+## 5. Online/Offline
+Als admin kan ik games online of offline halen
 
-Als ingelogde gebruiker wil ik een nieuw drankspel kunnen aanmaken via een formulier,
-zodat ik mijn eigen spelideeën met anderen kan delen.
-
-## 2. Spellen bewerken
-
-Als ingelogde gebruiker wil ik mijn eigen aangemaakte drankspellen kunnen bewerken,
-zodat ik fouten kan verbeteren of extra informatie kan toevoegen.
-
-## 3. Spellen verwijderen
-
-Als ingelogde gebruiker wil ik mijn eigen spellen kunnen verwijderen,
-zodat ik controle heb over welke spellen zichtbaar blijven.
-
-## 4. Favorieten opslaan
-
-Als ingelogde gebruiker wil ik drankspellen kunnen toevoegen aan mijn favorietenlijst,
-zodat ik later snel mijn favoriete spellen terugvind.
-
-## 5. Favorieten beheren
-
-Als ingelogde gebruiker wil ik mijn favorietenlijst kunnen bekijken en spellen eruit verwijderen,
-zodat ik mijn lijst up-to-date kan houden met enkel de spellen die ik echt leuk vind.
 
 ## ERD in Miro
 
@@ -108,9 +89,6 @@ had. Ik heb de teamskanaal gelijk uit de hidden kanalen gedaan en het via drawsq
 ![Homepage](image/homepage.png)
 ![Form/create](image/create.png)
 
-# 21-10-2025 Database proberen te fixen
-INVULLEN!!!
-
 # 27-10-2025
 Na de vakantie ben ik snel weer aan de slag gegaan omdat ik best wel achter liep. Mijn database werkte nog niet en ik heb dubbel zitten werken in mijn project.
 Op deze dag heb ik alles even recht gezet en proberen bij te lopen.
@@ -133,12 +111,22 @@ Hier heb ik de filter systeem erin gezet. Helaas werkt hij nog niet, dus moet ik
 
 
 # 1-11-2025 / 2-11-2025
+Omdat ik in het weekend veel had gewerkt ben ik op zaterdag avond verder gegaan aan:
 
-Omdat ik in het weekend veel had gewerkt ben ik op zaterdag avond verder gegaan aan
 ## admin dashboard
-![Admin dashboard](image/create-update.png)
-- toggles
-- edit pagina
+![Admin dashboard oud](image/admin-dashboard.png)
+![Admin dashboard nieuw](image/admin-dashboard-update.png)
+
+## toggles
+![Toggle admin](image/toggle-png.png)
+![Toggle code](image/toggle-code.png)
+
+## edit pagina
+![Edit pagina](image/edit-page.png)
+![Edit code](image/edit-page-code.png)
+
+
+
 
 
 
