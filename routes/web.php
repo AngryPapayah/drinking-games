@@ -5,17 +5,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
-// Openbaar
-Route::get('/', [GameController::class, 'dashboard'])->name('home');
-Route::get('/games/create', [GameController::class, 'create'])->name('games.create');
-Route::get('/dashboard', [GameController::class, 'dashboard'])->name('dashboard');
-Route::get('/games/{game}', [GameController::class, 'show'])->name('games.show');
-
-Route::view('/about-us', 'about-us', ['company' => 'BoozeBuddies'])->name('about');
-Route::view('/contact-page', 'contact-page')->name('contact-page');
-
 //Ingelogd (user)
 Route::middleware('auth')->group(function () {
+    Route::get('/games/create', [GameController::class, 'create'])->name('games.create');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -36,6 +28,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
         ->middleware(['auth', 'admin']);
 
 });
+
+// Openbaar
+Route::get('/', [GameController::class, 'dashboard'])->name('home');
+Route::get('/dashboard', [GameController::class, 'dashboard'])->name('dashboard');
+Route::get('/games/{game}', [GameController::class, 'show'])->name('games.show');
+
+Route::view('/about-us', 'about-us', ['company' => 'BoozeBuddies'])->name('about');
+Route::view('/contact-page', 'contact-page')->name('contact-page');
 
 // Auth scaffolding
 require __DIR__ . '/auth.php';
