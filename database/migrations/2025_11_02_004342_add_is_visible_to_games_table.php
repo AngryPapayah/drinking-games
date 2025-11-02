@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('games', function (Blueprint $table) {
-            $table->boolean('is_visible')->default(false);
+            $table->boolean('is_visible')->default(true)->change();
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('games', function (Blueprint $table) {
-            //
+            $table->boolean('is_visible')->default(false)->change();
         });
     }
 };

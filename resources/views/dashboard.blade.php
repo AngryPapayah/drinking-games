@@ -28,16 +28,24 @@
         @endif
 
         {{-- Add Game Button --}}
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 text-gray-900 dark:text-gray-100">
-                @auth
-                    <a href="{{ route('games.create') }}"
-                       class="inline-block px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">
-                        + Add Drinking Game
-                    </a>
-                @endauth
+        @auth
+            <div class="mb-6">
+                <a href="{{ route('games.create') }}"
+                   class="inline-flex items-center gap-2 px-5 py-2.5
+                          bg-gradient-to-r from-indigo-600 to-indigo-500
+                          text-white font-semibold rounded-xl shadow-md
+                          hover:from-indigo-700 hover:to-indigo-600
+                          focus:outline-none focus:ring-2 focus:ring-indigo-400
+                          focus:ring-offset-2 dark:focus:ring-offset-gray-900
+                          transition-all duration-200 ease-in-out">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    <span>Add New Drinking Game</span>
+                </a>
             </div>
-        </div>
+        @endauth
 
         {{-- Search & Filter --}}
         <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg p-6 mb-6">

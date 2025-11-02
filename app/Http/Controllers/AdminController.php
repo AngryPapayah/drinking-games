@@ -30,6 +30,6 @@ class AdminController extends Controller
             ]);
         }
 
-        return back()->with('status', 'Zichtbaarheid aangepast!');
+        return back()->with('Visibility Updated');
     }
 }
