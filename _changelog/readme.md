@@ -132,6 +132,17 @@ Hier heb ik de filter systeem erin gezet. Helaas werkt hij nog niet, dus moet ik
 ![Filter systeem erin gezet](image/filter-plus-taal-veranderd.png)
 
 
+# 1-11-2025 / 2-11-2025
+
+Omdat ik in het weekend veel had gewerkt ben ik op zaterdag avond verder gegaan aan
+## admin dashboard
+![Admin dashboard](image/create-update.png)
+- toggles
+- edit pagina
+
+
+
+
 
 
 
