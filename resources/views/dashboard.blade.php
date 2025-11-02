@@ -83,22 +83,6 @@
                     </select>
                 </div>
 
-                {{-- Filter op aantal spelers --}}
-                <div class="flex flex-col">
-                    <label for="players" class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                        Maximum players
-                    </label>
-                    <select name="players" id="players"
-                            class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700
-                           bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100
-                           focus:ring-indigo-500 focus:border-indigo-500 transition">
-                        <option value="">All players</option>
-                        <option value="2" {{ request('players') == 2 ? 'selected' : '' }}>2</option>
-                        <option value="4" {{ request('players') == 4 ? 'selected' : '' }}>4</option>
-                        <option value="6" {{ request('players') == 6 ? 'selected' : '' }}>6</option>
-                    </select>
-                </div>
-
                 {{-- Filterknop --}}
                 <div class="flex flex-col justify-end">
                     <button type="submit"
