@@ -27,7 +27,7 @@ zodat ik de website intuïtief kan gebruiken zonder account.
 Als gast wil ik bij acties zoals “spel aanmaken” of “favoriet maken” een melding of loginprompt krijgen,
 zodat ik weet dat ik een account nodig heb voor die functies.
 
-# Userstory Logged in
+# Userstory User
 
 ## 1. Spellen aanmaken
 
@@ -113,17 +113,24 @@ Hier heb ik de filter systeem erin gezet. Helaas werkt hij nog niet, dus moet ik
 # 1-11-2025 / 2-11-2025
 Omdat ik in het weekend veel had gewerkt ben ik op zaterdag avond verder gegaan aan:
 
-## admin dashboard
+## admin dashboard 
+Before
 ![Admin dashboard oud](image/admin-dashboard.png)
+After
 ![Admin dashboard nieuw](image/admin-dashboard-update.png)
 
 ## toggles
+Admin toggle
 ![Toggle admin](image/toggle-png.png)
+Admin Toggle code
 ![Toggle code](image/toggle-code.png)
 
 ## edit pagina
+Edit pagina
 ![Edit pagina](image/edit-page.png)
+Edit pagina code
 ![Edit code](image/edit-page-code.png)
+
 
 
 
