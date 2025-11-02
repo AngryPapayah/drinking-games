@@ -49,44 +49,68 @@
 
         {{-- Search & Filter --}}
         <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg p-6 mb-6">
-            <form method="GET" action="{{ route('dashboard') }}" class="flex flex-col sm:flex-row gap-4">
+            <form method="GET" action="{{ route('dashboard') }}"
+                  class="flex flex-col sm:flex-row sm:items-end flex-wrap gap-6">
+                @csrf
+
                 {{-- Zoekbalk --}}
-                <input type="text" name="search" value="{{ request('search') }}"
-                       placeholder="Search game..."
-                       class="flex-1 px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700
-                      bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100
-                      focus:ring-indigo-500 focus:border-indigo-500"/>
+                <div class="flex flex-col flex-1">
+                    <label for="search" class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                        Search games
+                    </label>
+                    <input type="text" name="search" id="search" value="{{ request('search') }}"
+                           placeholder="Search game..."
+                           class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700
+                          bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100
+                          focus:ring-indigo-500 focus:border-indigo-500 transition"/>
+                </div>
 
                 {{-- Filter op game type --}}
-                <select name="game_type"
-                        class="px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700
-                       bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100">
-                    <option value="">All types</option>
-                    @foreach($gameTypes as $type)
-                        <option value="{{ $type->id }}" {{ request('game_type') == $type->id ? 'selected' : '' }}>
-                            {{ $type->name }}
-                        </option>
-                    @endforeach
-                </select>
+                <div class="flex flex-col">
+                    <label for="game_type" class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                        Types games
+                    </label>
+                    <select name="game_type" id="game_type"
+                            class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700
+                           bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100
+                           focus:ring-indigo-500 focus:border-indigo-500 transition">
+                        <option value="">All types</option>
+                        @foreach($gameTypes as $type)
+                            <option value="{{ $type->id }}" {{ request('game_type') == $type->id ? 'selected' : '' }}>
+                                {{ $type->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
                 {{-- Filter op aantal spelers --}}
-                <select name="players"
-                        class="px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700
-                       bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100">
-                    <option value="">All players</option>
-                    <option value="2" {{ request('players') == 2 ? 'selected' : '' }}>2+</option>
-                    <option value="4" {{ request('players') == 4 ? 'selected' : '' }}>4+</option>
-                    <option value="6" {{ request('players') == 6 ? 'selected' : '' }}>6+</option>
-                </select>
+                <div class="flex flex-col">
+                    <label for="players" class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                        Maximum players
+                    </label>
+                    <select name="players" id="players"
+                            class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700
+                           bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100
+                           focus:ring-indigo-500 focus:border-indigo-500 transition">
+                        <option value="">All players</option>
+                        <option value="2" {{ request('players') == 2 ? 'selected' : '' }}>2</option>
+                        <option value="4" {{ request('players') == 4 ? 'selected' : '' }}>4</option>
+                        <option value="6" {{ request('players') == 6 ? 'selected' : '' }}>6</option>
+                    </select>
+                </div>
 
                 {{-- Filterknop --}}
-                <button type="submit"
-                        class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">
-                    Filter
-                </button>
+                <div class="flex flex-col justify-end">
+                    <button type="submit"
+                            class="px-6 py-2.5 bg-indigo-600 text-white font-medium rounded-lg
+                           hover:bg-indigo-700 focus:outline-none focus:ring-2
+                           focus:ring-indigo-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900
+                           transition-all duration-200 ease-in-out">
+                        Filter
+                    </button>
+                </div>
             </form>
         </div>
-
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @forelse ($games as $game)
 
