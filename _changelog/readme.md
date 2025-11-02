@@ -128,6 +128,9 @@ Omdat ik in het weekend veel had gewerkt ben ik op zaterdag avond verder gegaan 
 ## Edit pagina
 ![Edit pagina](image/edit-page.png)
 ## Edit pagina code
+![Edit code](image/edit-page-code.png)
+
+
 
 
 
