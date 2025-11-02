@@ -114,22 +114,22 @@ Hier heb ik de filter systeem erin gezet. Helaas werkt hij nog niet, dus moet ik
 Omdat ik in het weekend veel had gewerkt ben ik op zaterdag avond verder gegaan aan:
 
 ## admin dashboard 
-Before
+## Before
 ![Admin dashboard oud](image/admin-dashboard.png)
-After
+## After
 ![Admin dashboard nieuw](image/admin-dashboard-update.png)
 
 ## toggles
-Admin toggle
+## Admin toggle
 ![Toggle admin](image/toggle-png.png)
-Admin Toggle code
+## Admin Toggle code
 ![Toggle code](image/toggle-code.png)
 
-## edit pagina
-Edit pagina
+## Edit pagina
 ![Edit pagina](image/edit-page.png)
-Edit pagina code
-![Edit code](image/edit-page-code.png)
+## Edit pagina code
+
+
 
 
 
